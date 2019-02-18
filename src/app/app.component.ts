@@ -1,4 +1,6 @@
-import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 // Declara a lib do videojs como externa ao angular
 declare let videojs: any;
 
@@ -8,30 +10,43 @@ declare let videojs: any;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-   // Title of component
-   title = 'Player';
-   // Instance of video.js.
-   vidObj: any;
-   // Poster for no video.js
-   poster = '//d2zihajmogu5jn.cloudfront.net/elephantsdream/poster.png';
-   // URL of video.
-   videoUrl = '//d2zihajmogu5jn.cloudfront.net/elephantsdream/ed_hd.mp4';
-   
-   @ViewChild('myvid') vid: ElementRef;
- 
-   ngAfterViewInit() {
-     const options = {
-       controls: true,
-       autoplay: false,
-       loop: true,
-       preload: 'auto',
-       techOrder: ['html5']
-     };
- 
-     this.vidObj = new videojs(this.vid.nativeElement, options, function onPlayerReady() {
-       videojs.log(videojs(this.vid.nativeElement));
-     }); 
-   
-     console.log(new videojs(this.vid.nativeElement))
-   }
+  // Title of component
+  title = 'Player';
+  // Instance of video.js.
+  vidObj: any;
+  options: any;
+  temp: any = true;
+  // Poster for no video.js
+  poster = '//d2zihajmogu5jn.cloudfront.net/elephantsdream/poster.png';
+  // URL of video.
+  videoUrl = '//d2zihajmogu5jn.cloudfront.net/elephantsdream/ed_hd.mp4';
+
+  constructor() { }
+
+  @ViewChild('myvid') vid: ElementRef;
+
+  ngOnInit() {
+    this.options = {
+      controls: true,
+      autoplay: false,
+      loop: true,
+      preload: 'auto',
+      techOrder: ['html5']
+    };
+  }
+
+  toggleLoop(){
+    this.vidObj.loop(this.options.loop);
+  }
+
+  toggleControls(){
+    this.vidObj.controls(this.options.controls);
+  }
+
+  ngAfterViewInit() {
+    this.vidObj = new videojs(this.vid.nativeElement, this.options, () => {
+      videojs.log(videojs(this.vid.nativeElement));
+    });
+
+  }
 }

@@ -25,12 +25,10 @@
             "styles": [
               "src/styles.css",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "./node_modules/video.js/dist/video-js.min.css",
-              "../assets/marker/videojs.markers.css"
+              "./node_modules/video.js/dist/video-js.min.css"
             ],
             "scripts": [
-              "./node_modules/video.js/dist/video.min.js",
-              "./assets/marker/videojs-markers.js"
+              "./node_modules/video.js/dist/video.min.js"
             ]
           },
           "configurations": {
