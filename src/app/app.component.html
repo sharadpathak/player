@@ -17,13 +17,18 @@
     </div>
     <div class="row">
         <div class="col-4">         
-          <input type="checkbox" [(ngModel)]="options.loop" (ngModelChange)="toggleLoop()"/> Loop    
+          <input type="checkbox" [(ngModel)]="options.loop" (ngModelChange)="toggleLoop()"/> Loop  
+          <input type="checkbox" [(ngModel)]="options.controls" (ngModelChange)="toggleControls()"/> Controls
+          <input type="checkbox" [(ngModel)]="options.fluid" (ngModelChange)="toggleFluid()"/> Fluid 
+          <input type="checkbox" [(ngModel)]="options.muted" (ngModelChange)="toggleMute()"/> Mute
         </div> 
         <div class="col-4">         
-            <input type="checkbox" [(ngModel)]="options.controls" (ngModelChange)="toggleControls()"/> Controls              
+            <!-- <input type="checkbox" [(ngModel)]="options.controls" (ngModelChange)="toggleControls()"/> Controls               -->
         </div>
         <div class="col-4">         
-          <h3 class="text-center">{{title}}</h3>         
+          <button class="previous">Previous</button><br>
+          <button class="next">Next</button><br>
+          <button class="jump">Play Third</button>        
         </div>
     </div>
   </div>

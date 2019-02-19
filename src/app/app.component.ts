@@ -1,7 +1,6 @@
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-
-// Declara a lib do videojs como externa ao angular
+ 
 declare let videojs: any;
 
 @Component({
@@ -31,9 +30,46 @@ export class AppComponent {
       autoplay: false,
       loop: true,
       preload: 'auto',
-      techOrder: ['html5']
+      techOrder: ['html5'],
+      fluid:false,
+      muted:false
     };
   }
+  
+videoList = [{
+              sources: [{
+                src: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
+                type: 'video/mp4'
+              }],
+              poster: 'https://www.rt.com/static/img/og-logo-rt.png'
+            }, {
+              sources: [{
+                src: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
+                type: 'video/mp4'
+              }],
+              poster: 'http://media.w3.org/2010/05/bunny/poster.png'
+            }, {
+              sources: [{
+                src: 'https://vjs.zencdn.net/v/oceans.mp4',
+                type: 'video/mp4'
+              }],
+              poster: 'https://vjs.zencdn.net/v/oceans.png'
+            }, {
+              sources: [{
+                src: 'http://media.w3.org/2010/05/bunny/movie.mp4',
+                type: 'video/mp4'
+              }],
+              poster: 'http://media.w3.org/2010/05/bunny/poster.png'
+            }, {
+              sources: [{
+                src: 'http://media.w3.org/2010/05/video/movie_300.mp4',
+                type: 'video/mp4'
+              }],
+              poster: 'http://media.w3.org/2010/05/video/poster.png'
+            }];
+
+
+     
 
   toggleLoop(){
     this.vidObj.loop(this.options.loop);
@@ -42,11 +78,20 @@ export class AppComponent {
   toggleControls(){
     this.vidObj.controls(this.options.controls);
   }
+   
+  toggleMute() {
+    this.vidObj.muted(this.options.muted);
+  }
+  
+  toggleFluid() {
+    this.vidObj.fluid(this.options.fluid);
+  }
+
+  
 
   ngAfterViewInit() {
     this.vidObj = new videojs(this.vid.nativeElement, this.options, () => {
       videojs.log(videojs(this.vid.nativeElement));
-    });
-
+    }); 
   }
 }
