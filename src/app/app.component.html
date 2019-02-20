@@ -26,9 +26,8 @@
             <!-- <input type="checkbox" [(ngModel)]="options.controls" (ngModelChange)="toggleControls()"/> Controls               -->
         </div>
         <div class="col-4">         
-          <button class="previous">Previous</button><br>
-          <button class="next">Next</button><br>
-          <button class="jump">Play Third</button>        
+          <button class="previous" (click)="previous()">Previous</button>
+          <button class="next" (click)="next()">Next</button><br>
         </div>
     </div>
   </div>

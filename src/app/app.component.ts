@@ -18,8 +18,9 @@ export class AppComponent {
   // Poster for no video.js
   poster = '//d2zihajmogu5jn.cloudfront.net/elephantsdream/poster.png';
   // URL of video.
-  videoUrl = '//d2zihajmogu5jn.cloudfront.net/elephantsdream/ed_hd.mp4';
-
+  videoUrl: any;
+  //'//d2zihajmogu5jn.cloudfront.net/elephantsdream/ed_hd.mp4';
+  counter:number = 0;
   constructor() { }
 
   @ViewChild('myvid') vid: ElementRef;
@@ -34,6 +35,8 @@ export class AppComponent {
       fluid:false,
       muted:false
     };
+   this.videoUrl = this.videoList[0].sources[0].src;
+   this.poster = this.videoList[0].poster;
   }
   
 videoList = [{
@@ -42,31 +45,36 @@ videoList = [{
                 type: 'video/mp4'
               }],
               poster: 'https://www.rt.com/static/img/og-logo-rt.png'
-            }, {
+            }, 
+            {
               sources: [{
                 src: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
                 type: 'video/mp4'
               }],
               poster: 'http://media.w3.org/2010/05/bunny/poster.png'
-            }, {
+            }, 
+            {
               sources: [{
                 src: 'https://vjs.zencdn.net/v/oceans.mp4',
                 type: 'video/mp4'
               }],
               poster: 'https://vjs.zencdn.net/v/oceans.png'
-            }, {
+            },
+             {
               sources: [{
                 src: 'http://media.w3.org/2010/05/bunny/movie.mp4',
                 type: 'video/mp4'
               }],
               poster: 'http://media.w3.org/2010/05/bunny/poster.png'
-            }, {
+            }, 
+            {
               sources: [{
                 src: 'http://media.w3.org/2010/05/video/movie_300.mp4',
                 type: 'video/mp4'
               }],
               poster: 'http://media.w3.org/2010/05/video/poster.png'
-            }];
+            }
+          ];
 
 
      
@@ -87,7 +95,35 @@ videoList = [{
     this.vidObj.fluid(this.options.fluid);
   }
 
-  
+  next() {
+    if(this.videoUrl) {
+      ++this.counter;
+      for( let i =this.counter;i< this.videoList.length;i++) {
+          let source = this.videoList[i];
+          this.videoUrl = source.sources[0].src;
+          this.poster = this.videoList[i].poster;
+          console.log(this.videoUrl); 
+          this.vidObj.play();          
+          break;
+      }
+    }
+  }
+
+  previous() {
+    if(this.videoUrl) {
+      if(this.counter >= 0) {
+        --this.counter;
+      for( let i =this.counter;i< this.videoList.length;i--) {
+          let source = this.videoList[i];
+          this.videoUrl = source.sources[0].src;
+          this.poster = this.videoList[i].poster;
+          console.log(this.videoUrl); 
+          this.vidObj.play(); 
+          break;
+      }
+    }
+    }
+  }  
 
   ngAfterViewInit() {
     this.vidObj = new videojs(this.vid.nativeElement, this.options, () => {
