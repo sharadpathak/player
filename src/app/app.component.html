@@ -1,12 +1,5 @@
-<div class="container-fluid">
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <div class="jumbotron">
-          <h3 class="text-center">{{ videoUrl }}</h3>
-        </div>
-      </div>
-    </div>
+ <header class="text-center"><h1>Player</h1></header>
+ <section>
     <div class="row">
       <div class="col text-center">
         <video
@@ -22,43 +15,51 @@
           <source [src]="videoUrl" type="video/mp4" />
         </video>
       </div>
-    </div>
+    </div>          
+     
     <div class="row">
-      <div class="col-4">
-        <input
-          type="checkbox"
-          [(ngModel)]="options.loop"
-          (ngModelChange)="toggleLoop()"
-        />
-        Loop
-        <input
-          type="checkbox"
-          [(ngModel)]="options.controls"
-          (ngModelChange)="toggleControls()"
-        />
-        Controls
-        <input
-          type="checkbox"
-          [(ngModel)]="options.fluid"
-          (ngModelChange)="toggleFluid()"
-        />
-        Fluid
-        <input
-          type="checkbox"
-          [(ngModel)]="options.muted"
-          (ngModelChange)="toggleMute()"
-        />
-        Mute
-      </div>
-      <div class="col-4">
-        <!-- <input type="checkbox" [(ngModel)]="options.controls" (ngModelChange)="toggleControls()"/> Controls               -->
-      </div>
-      <div class="col-4">
-        <button class="previous" (click)="previous()">Previous</button>
-        <button class="next" (click)="next()">Next</button><br />
+      <div class="col-12">
+        <span class="cos"><strong>Controls</strong></span>
       </div>
     </div>
-  </div>
-</div>
+      <div class="row ">
+          <div class="col-md-2"></div> 
+      
+
+      <div class="col-md-6">
+          <label class="switch">
+              <input type="checkbox" [(ngModel)]="options.loop"
+              (ngModelChange)="toggleLoop()">
+              <span class="slider round"> </span>
+            </label>
+        Loop
+        <label class="switch">
+          <input type="checkbox"          
+          [(ngModel)]="options.controls"
+          (ngModelChange)="toggleControls()">
+          <span class="slider round"> </span>
+        </label>
+        Controls
+        <label class="switch">
+            <input type="checkbox"
+            [(ngModel)]="options.fluid"
+            (ngModelChange)="toggleFluid()">
+            <span class="slider round"> </span>
+        </label>
+        Fluid
+        <label class="switch">
+            <input type="checkbox" [(ngModel)]="options.muted"
+            (ngModelChange)="toggleMute()">
+            <span class="slider round"> </span>
+        </label>         
+        Mute
+      </div> 
+      <div class="col-md-4">
+          <button class="btn btn-info" (click)="previous()">Previous</button>
+          <button class="btn btn-info" (click)="next()">Next</button>
+        </div>
+    </div>
+
+  </section>
 
 <router-outlet></router-outlet>

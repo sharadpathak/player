@@ -110,24 +110,11 @@ export class AppComponent {
   }
 
   next() {
+    let arrLenth = this.videoList.length;
     if (this.videoUrl) {
       ++this.counter;
-      for (let i = this.counter; i < this.videoList.length; i++) {
-        let source = this.videoList[i];
-        this.videoUrl = source.sources[0].src;
-        this.poster = this.videoList[i].poster;
-        this.vid.nativeElement.src = this.videoUrl;
-        this.vidObj.play();
-        break;
-      }
-    }
-  }
-
-  previous() {
-    if (this.videoUrl) {
-      if (this.counter >= 0) {
-        --this.counter;
-        for (let i = this.counter; i < this.videoList.length; i--) {
+      if(this.counter < arrLenth){
+        for (let i = this.counter; i < arrLenth; i++) {
           let source = this.videoList[i];
           this.videoUrl = source.sources[0].src;
           this.poster = this.videoList[i].poster;
@@ -135,6 +122,28 @@ export class AppComponent {
           this.vidObj.play();
           break;
         }
+      } else {
+        alert("You are at Last Video");
+      }      
+    }
+  }
+
+  previous() {
+    if (this.videoUrl) {
+      if (this.counter >= 0) {
+        --this.counter;
+        if(this.counter > -1) {
+          for (let i = this.counter; i < this.videoList.length; i--) {
+            let source = this.videoList[i];
+            this.videoUrl = source.sources[0].src;
+            this.poster = this.videoList[i].poster;
+            this.vid.nativeElement.src = this.videoUrl;
+            this.vidObj.play();
+            break;
+          }
+        } else {
+          alert("You are at first Video");
+        }     
       }
     }
   }
