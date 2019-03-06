@@ -11,6 +11,7 @@
           height="360"
           [poster]="poster"
           style="margin: auto;"
+          data-setup='{ "playbackRates": [0.5, 1, 1.5, 2,3] }'
         >
           <source [src]="videoUrl" type="video/mp4" />
         </video>
@@ -55,8 +56,8 @@
         Mute
       </div> 
       <div class="col-md-4">
-          <button class="btn btn-info" (click)="previous()">Previous</button>
-          <button class="btn btn-info" (click)="next()">Next</button>
+          <button class="btn btn-info" [disabled]="counter === 0" (click)="previous()">Previous</button>
+          <button class="btn btn-info" [disabled]="counter === arrLenth-1" (click)="next()">Next</button>
         </div>
     </div>
 

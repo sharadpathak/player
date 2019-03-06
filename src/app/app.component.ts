@@ -102,6 +102,7 @@ export class AppComponent {
   }
 
   toggleMute() {
+    console.log(this.options.muted)
     this.vidObj.muted(this.options.muted);
   }
 
@@ -109,12 +110,15 @@ export class AppComponent {
     this.vidObj.fluid(this.options.fluid);
   }
 
+  
+
+  arrLenth:number = this.videoList.length;
   next() {
-    let arrLenth = this.videoList.length;
+    
     if (this.videoUrl) {
       ++this.counter;
-      if(this.counter < arrLenth){
-        for (let i = this.counter; i < arrLenth; i++) {
+      if(this.counter < this.arrLenth){
+        for (let i = this.counter; i < this.arrLenth; i++) {
           let source = this.videoList[i];
           this.videoUrl = source.sources[0].src;
           this.poster = this.videoList[i].poster;
@@ -133,7 +137,7 @@ export class AppComponent {
       if (this.counter >= 0) {
         --this.counter;
         if(this.counter > -1) {
-          for (let i = this.counter; i < this.videoList.length; i--) {
+          for (let i = this.counter; i < this.arrLenth; i--) {
             let source = this.videoList[i];
             this.videoUrl = source.sources[0].src;
             this.poster = this.videoList[i].poster;

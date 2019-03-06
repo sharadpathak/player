@@ -26,10 +26,10 @@
     "path": "^0.12.7",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
+    "typescript": "~3.2.2",
     "video.js": "^7.4.1",
     "videojs-playlist": "^4.3.0",
-    "zone.js": "~0.8.26",
-    "typescript": "~3.2.2"
+    "zone.js": "~0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.12.0",
