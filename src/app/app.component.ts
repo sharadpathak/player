@@ -15,6 +15,7 @@ declare let videojs: any;
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
+  timerSec:number = 5;
   // Title of component
   title = "Player";
   // Instance of video.js.
@@ -36,10 +37,10 @@ export class AppComponent {
       controls: true,
       autoplay: false,
       loop: true,
-      preload: "auto",
+      preload: "none",
       techOrder: ["html5"],
       fluid: false,
-      muted: true
+      muted: true,
     };
     this.videoUrl = this.videoList[0].sources[0].src;
     this.poster = this.videoList[0].poster;
@@ -106,6 +107,17 @@ export class AppComponent {
     this.vidObj.muted(this.options.muted);
   }
 
+  pause(){
+    console.log("play");
+    //this.vidObj.play();
+    if (this.vidObj.paused()) {
+      this.vidObj.play();
+    }
+    else {
+      this.vidObj.pause();
+    }
+  }
+
   toggleFluid() {
     this.vidObj.fluid(this.options.fluid);
   }
@@ -123,7 +135,8 @@ export class AppComponent {
           this.videoUrl = source.sources[0].src;
           this.poster = this.videoList[i].poster;
           this.vid.nativeElement.src = this.videoUrl;
-          this.vidObj.play();
+          this.timerSec = 5;
+          this.counterTimer();
           break;
         }
       } else {
@@ -142,7 +155,8 @@ export class AppComponent {
             this.videoUrl = source.sources[0].src;
             this.poster = this.videoList[i].poster;
             this.vid.nativeElement.src = this.videoUrl;
-            this.vidObj.play();
+            this.timerSec = 5;
+           this.counterTimer();
             break;
           }
         } else {
@@ -152,9 +166,22 @@ export class AppComponent {
     }
   }
 
+  counterTimer() {
+    let interval = setInterval(() => {
+      this.timerSec--;
+      if(this.timerSec < 1) {
+           clearInterval(interval);
+           this.vidObj.play()
+      } else {
+          //console.log(this.timerSec.toString());
+      }
+  }, 1000);
+  }
+
   ngAfterViewInit() {
     this.vidObj = new videojs(this.vid.nativeElement, this.options, () => {
       videojs.log(videojs(this.vid.nativeElement));
     });
+    this.counterTimer();
   }
 }

@@ -1,32 +1,33 @@
  <header class="text-center"><h1>Player</h1></header>
  <section>
+   <!-- <div class="text-center timer"  [hidden]="timerSec === 0">{{ timerSec }}</div>
+  -->
     <div class="row">
-      <div class="col text-center">
-        <video
-          #myvid
-          id="my-video"
-          autoplay
-          class="video-js vjs-big-play-centered mini-play"
-          width="640"
-          height="360"
-          [poster]="poster"
-          style="margin: auto;"
-          data-setup='{ "playbackRates": [0.5, 1, 1.5, 2,3] }'
-        >
-          <source [src]="videoUrl" type="video/mp4" />
-        </video>
+      <div class="col-md-12 text-center">
+          <div class="container">
+            <video class="image"
+              #myvid
+              id="my-video"
+              class="video-js vjs-big-play-centered mini-play"
+              width="640"
+              height="360"
+              [poster]="poster"
+              style="margin: auto;"
+              data-setup='{ "playbackRates": [0.5, 1, 1.5, 2,3] }'    
+            >
+              <source [src]="videoUrl" type="video/mp4" />
+            </video>
+            <div class="middle" [hidden]="timerSec === 0">
+                <div class="text">{{ timerSec }}</div>
+              </div>
+        </div>
       </div>
-    </div>          
-     
-    <div class="row">
-      <div class="col-12">
-        <span class="cos"><strong>Controls</strong></span>
-      </div>
-    </div>
-      <div class="row ">
-          <div class="col-md-2"></div> 
-      
 
+      <div class="col-12">
+          <span class="cos"><strong>Controls</strong></span>
+        </div>
+
+        
       <div class="col-md-6">
           <label class="switch">
               <input type="checkbox" [(ngModel)]="options.loop"
@@ -60,7 +61,6 @@
           <button class="btn btn-info" [disabled]="counter === arrLenth-1" (click)="next()">Next</button>
         </div>
     </div>
-
   </section>
 
 <router-outlet></router-outlet>
